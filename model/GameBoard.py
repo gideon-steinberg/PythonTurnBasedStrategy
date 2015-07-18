@@ -30,10 +30,6 @@ class GameBoard:
         return self.__selected_y
     
     def select_item(self, x ,y):
-        print x,
-        print y
-        print isinstance(self.__board[x][y], PlayerSprite)
-        print self.__board[x][y]
         if isinstance(self.__board[x][y], PlayerSprite):
             # already selected
             if self.__selected_x == x and self.__selected_y == y:
