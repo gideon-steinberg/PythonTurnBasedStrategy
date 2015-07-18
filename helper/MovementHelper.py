@@ -5,7 +5,7 @@ class MovementHelper:
         possible_movement = []
         
         # 0 is a bit weird
-        MovementHelper.__insert_item(possible_movement,0,0)
+        MovementHelper.__insert_item(possible_movement,x,y)
         
         # maths incoming
         for distance in range(movement_range + 2):
