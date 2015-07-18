@@ -4,10 +4,11 @@ from Tkinter import Canvas
 from helper.Constants import Constants
 from controller.timers.PrintTimer import PrintTimer
 from controller.timers.RefreshTimer import RefreshTimer
-from view.printers.BoardPrinter import BoardPrinter
 from controller.eventhandlers.ArrowHandler import ArrowHandler
 from controller.eventhandlers.KeyMovementHandler import KeyMovementHandler
 from controller.eventhandlers.MouseClickHandler import MouseClickHandler
+from view.printers.SelectPrinter import SelectPrinter
+from view.printers.BoardPrinter import BoardPrinter
 
 class CanvasFrame(Frame):
     
@@ -29,6 +30,7 @@ class CanvasFrame(Frame):
     def refresh(self):
         self.__canvas.delete('all')
         BoardPrinter.print_board(self.__canvas)
+        SelectPrinter.print_selected(self.__canvas)
         
     def __init__(self):
         Frame.__init__(self, Tk())
