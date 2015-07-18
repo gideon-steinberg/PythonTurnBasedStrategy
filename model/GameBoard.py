@@ -2,6 +2,7 @@ from model.sprite.Sprite import Sprite
 from helper.Constants import Constants
 from model.sprite.PlayerSprite import PlayerSprite
 from model.sprite.MonsterSprite import MonsterSprite
+from model.sprite.CreatureSprite import CreatureSprite
 
 class GameBoard:
     
@@ -29,31 +30,76 @@ class GameBoard:
     def get_selected_y(self):
         return self.__selected_y
     
+    def set_turntracker(self, turntracker):
+        self.__turntracker = turntracker
+    
     def swap_sprites(self, x1, y1, x2, y2):
         temp = self.__board[x1][y1]
         self.__board[x1][y1] = self.__board[x2][y2]
         self.__board[x2][y2] = temp
+        
+        # get the turntracker to track this action
+        if isinstance(self.__board[x1][y1], PlayerSprite):
+            self.__turntracker.track_player_turn(self.__board[x1][y1])
+            
+        # get the turntracker to track this action
+        if isinstance(self.__board[x2][y2], PlayerSprite):
+            self.__turntracker.track_player_turn(self.__board[x2][y2])
+            
+                    # get the turntracker to track this action
+        if isinstance(self.__board[x1][y1], MonsterSprite):
+            self.__turntracker.track_monster_turn(self.__board[x1][y1])
+            
+        # get the turntracker to track this action
+        if isinstance(self.__board[x2][y2], MonsterSprite):
+            self.__turntracker.track_monster_turn()(self.__board[x2][y2])
     
-    def select_sprite(self, x ,y):
-        # if a player is selected
-        if isinstance(self.__board[x][y], PlayerSprite):
-            # already selected
-            if self.__selected_x == x and self.__selected_y == y:
-                self.__reset_selected_item()
+    def select_sprite(self, x ,y, monster_action=False):
+        # player turn
+        if len(self.__turntracker.get_players_to_act()) > 0:
+            print 'players turn'
+            # if a player is selected
+            if isinstance(self.__board[x][y], PlayerSprite):
+                # if there are no players to act ignore it
+                if self.__board[x][y] in self.__turntracker.get_players_to_act():
+                    # already selected
+                    if self.__selected_x == x and self.__selected_y == y:
+                        self.reset_selected_item()
+                    else:
+                        # capture this selection
+                        self.__selected_x = x
+                        self.__selected_y = y
+            # if there is a captured player selection
+            elif self.__is_captured_player_selection():
+                # move the player
+                player = self.__board[self.__selected_x][self.__selected_y]
+                if isinstance(player, PlayerSprite):
+                    player.move(self.__selected_x, self.__selected_y, x, y, self)
+                self.reset_selected_item()
+            else:
+                self.reset_selected_item()
+        # creature action   
+        elif monster_action and len(self.__turntracker.get_players_to_act()) == 0:
+            if self.__selected_x >= 0 and self.__selected_y >= 0:
+                #move the creature
+                creature = self.__board[self.__selected_x][self.__selected_y]
+                if isinstance(creature, CreatureSprite):
+                    creature.move(self.__selected_x, self.__selected_y, x, y, self)
+                self.reset_selected_item()
             else:
                 # capture this selection
                 self.__selected_x = x
                 self.__selected_y = y
-        # if there is a captured selection
-        elif self.__selected_x >= 0 and self.__selected_y >= 0:
-            # move the player
-            player = self.__board[self.__selected_x][self.__selected_y]
-            player.move(self.__selected_x, self.__selected_y, x, y, self)
-            self.__reset_selected_item()    
-        else:
-            self.__reset_selected_item()
     
-    def __reset_selected_item(self):
+    def __is_captured_player_selection(self):
+        result = True
+        if not isinstance(self.__board[self.__selected_x][self.__selected_y], PlayerSprite):
+            result = False
+        if self.__selected_x < 0 or self.__selected_y < 0:
+            result = False
+        return result
+    
+    def reset_selected_item(self):
         self.__selected_x = -1
         self.__selected_y = -1
 
@@ -73,7 +119,8 @@ class GameBoard:
         self.__board[2][3] = PlayerSprite()
         self.__board[2][6] = PlayerSprite()
         
-        # insert a creature sprite
+        # insert some creature sprites
         self.__board[0][1] = MonsterSprite()
+        self.__board[2][4] = MonsterSprite()
         
-        self.__reset_selected_item()
+        self.reset_selected_item()

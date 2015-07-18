@@ -9,6 +9,7 @@ from controller.eventhandlers.KeyMovementHandler import KeyMovementHandler
 from controller.eventhandlers.MouseClickHandler import MouseClickHandler
 from view.printers.SelectPrinter import SelectPrinter
 from view.printers.BoardPrinter import BoardPrinter
+from controller.timers.MonsterTimer import MonsterTimer
 
 class CanvasFrame(Frame):
     
@@ -21,6 +22,7 @@ class CanvasFrame(Frame):
         
     def __setup_timer(self):
         RefreshTimer(self.master, 100, self)
+        MonsterTimer(self.master, 1000)
         
     def __setup_handlers(self):
         ArrowHandler(self.master)

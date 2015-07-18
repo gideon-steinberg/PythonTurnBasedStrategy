@@ -1,6 +1,7 @@
 from model.GameState import GameState
 from helper.Constants import Constants
 from helper.MovementHelper import MovementHelper
+from helper.OnScreenHelper import OnScreenHelper
 class SelectPrinter:
     @staticmethod
     def print_selected(canvas):
@@ -9,7 +10,7 @@ class SelectPrinter:
         y =  GameState.get_board().get_selected_y()
         
         # if on screen
-        if (x >= 0 and y >= 0 and x < Constants.DEFAULT_BOARD_WIDTH() and y < Constants.DEFAULT_BOARD_HEIGHT()):
+        if OnScreenHelper.is_on_screen(x, y):
             # print this selection
             SelectPrinter.__print_small_box(canvas, x, y, 'green')
             
