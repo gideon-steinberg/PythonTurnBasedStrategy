@@ -1,13 +1,13 @@
 class BaseHandler:
     def __init__(self, frame_root):
         self.__frame_root = frame_root
-        self.setup_handler()
+        self.__setup_handler()
         
     def handle_event(self, event):
         ''' method implemented in children '''
         pass
     
-    def setup_handler(self):
+    def __setup_handler(self):
         for event in self.events_to_bind():
             self.__frame_root.bind(event, self.handle_event)
         
