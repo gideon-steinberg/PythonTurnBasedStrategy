@@ -1,5 +1,5 @@
 from model.GameState import GameState
-from utils.Constants import Constants
+from helper.Constants import Constants
 class BoardPrinter:
     @staticmethod
     def print_board(canvas):

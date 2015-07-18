@@ -1,5 +1,5 @@
 from model.sprites.Sprite import Sprite
-from utils.Constants import Constants
+from helper.Constants import Constants
 from model.sprites.CreatureSprite import CreatureSprite
 from model.sprites.PlayerSprite import PlayerSprite
 
