@@ -15,3 +15,6 @@ class CreatureSprite(Sprite):
         
     def get_default_colour(self):
         return 'orange'
+    
+    def get_movement_range(self):
+        return 5
