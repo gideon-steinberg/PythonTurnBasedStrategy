@@ -1,6 +1,6 @@
 from Tkinter import Frame
 from Tkinter import Button
-from CanvasFrame import CanvasFrame
+from view.frames import CanvasFrame
 
 class MainFrame(Frame):
     def say_hi(self):
