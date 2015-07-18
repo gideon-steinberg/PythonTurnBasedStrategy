@@ -1,7 +1,6 @@
 from model.GameState import GameState
 from helper.Constants import Constants
 from helper.MovementHelper import MovementHelper
-from model.sprite.Sprite import Sprite
 class SelectPrinter:
     @staticmethod
     def print_selected(canvas):
