@@ -1,7 +1,8 @@
-from Tkinter import Tk
-from view.MainFrame import MainFrame
+from model.GameState import GameState
+from view.frames.CanvasFrame import CanvasFrame
 
-root = Tk()
-app = MainFrame(master=root)
+gb = GameState.get_board()
+gb.print_board();
+
+app = CanvasFrame()
 app.mainloop()
-root.destry()
