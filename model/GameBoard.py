@@ -1,7 +1,7 @@
-from model.Sprites.Sprite import Sprite
-from Utils.Constants import Constants
-from model.Sprites.CreatureSprite import CreatureSprite
-from model.Sprites.PlayerSprite import PlayerSprite
+from model.sprites.Sprite import Sprite
+from utils.Constants import Constants
+from model.sprites.CreatureSprite import CreatureSprite
+from model.sprites.PlayerSprite import PlayerSprite
 
 class GameBoard:
     
