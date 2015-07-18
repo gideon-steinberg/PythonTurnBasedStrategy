@@ -1,4 +1,4 @@
-class BlankSprite:
+class Sprite:
     def is_blank(self):
         return True
     
