@@ -29,14 +29,27 @@ class GameBoard:
     def get_selected_y(self):
         return self.__selected_y
     
-    def select_item(self, x ,y):
+    def swap_sprites(self, x1, y1, x2, y2):
+        temp = self.__board[x1][y1]
+        self.__board[x1][y1] = self.__board[x2][y2]
+        self.__board[x2][y2] = temp
+    
+    def select_sprite(self, x ,y):
+        # if a player is selected
         if isinstance(self.__board[x][y], PlayerSprite):
             # already selected
             if self.__selected_x == x and self.__selected_y == y:
                 self.__reset_selected_item()
             else:
+                # capture this selection
                 self.__selected_x = x
                 self.__selected_y = y
+        # if there is a captured selection
+        elif self.__selected_x > 0 and self.__selected_y > 0:
+            # move the player
+            player = self.__board[self.__selected_x][self.__selected_y]
+            player.move(self.__selected_x, self.__selected_y, x, y, self)
+            self.__reset_selected_item()    
         else:
             self.__reset_selected_item()
     
