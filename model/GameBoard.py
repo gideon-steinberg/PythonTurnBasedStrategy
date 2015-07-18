@@ -1,7 +1,7 @@
 from model.sprite.Sprite import Sprite
 from helper.Constants import Constants
-from model.sprite.CreatureSprite import CreatureSprite
 from model.sprite.PlayerSprite import PlayerSprite
+from model.sprite.MonsterSprite import MonsterSprite
 
 class GameBoard:
     
@@ -74,6 +74,6 @@ class GameBoard:
         self.__board[2][6] = PlayerSprite()
         
         # insert a creature sprite
-        self.__board[0][1] = CreatureSprite()
+        self.__board[0][1] = MonsterSprite()
         
         self.__reset_selected_item()
