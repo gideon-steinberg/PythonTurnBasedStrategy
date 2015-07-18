@@ -1,6 +1,7 @@
-from model.Sprites.Player import Player
 from model.Sprites.Sprite import Sprite
 from Utils.Constants import Constants
+from model.Sprites.CreatureSprite import CreatureSprite
+from model.Sprites.PlayerSprite import PlayerSprite
 
 class GameBoard:
     
@@ -25,6 +26,9 @@ class GameBoard:
                 array.append(Sprite())
             self.board.append(array)
             
-        # insert the player
-        self.board[2][3] = Player()
+        # insert a player sprite
+        self.board[2][3] = PlayerSprite()
+        
+        # insert a creature sprite
+        self.board[0][1] = CreatureSprite()
         
