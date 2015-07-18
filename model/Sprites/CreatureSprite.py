@@ -8,10 +8,10 @@ class CreatureSprite(Sprite):
         return 'creature'
     
     def get_hp(self):
-        return self.hp
+        return self.__hp
     
     def __init__(self):
-        self.hp = 5
+        self.__hp = 5
         
     def get_default_colour(self):
         return 'orange'
