@@ -45,7 +45,7 @@ class GameBoard:
                 self.__selected_x = x
                 self.__selected_y = y
         # if there is a captured selection
-        elif self.__selected_x > 0 and self.__selected_y > 0:
+        elif self.__selected_x >= 0 and self.__selected_y >= 0:
             # move the player
             player = self.__board[self.__selected_x][self.__selected_y]
             player.move(self.__selected_x, self.__selected_y, x, y, self)
