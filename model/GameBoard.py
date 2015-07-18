@@ -9,8 +9,8 @@ class GameBoard:
         ''' Print the board 
             Print out the type of each item
         '''
-        for i in range(0, len(self.__board)):
-            for j in range(0, len(self.__board[i])):
+        for i in range(len(self.__board)):
+            for j in range(len(self.__board[i])):
                 print self.__board[i][j].get_type() + ",",
             print ""
             
@@ -29,9 +29,9 @@ class GameBoard:
         
         # populate the __board
         # _ is an "i don't care variable"
-        for _ in range(0,width):
+        for _ in range(width):
             array = []
-            for _ in range(0,height):
+            for _ in range(height):
                 array.append(Sprite())
             self.__board.append(array)
             

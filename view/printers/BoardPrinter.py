@@ -9,8 +9,8 @@ class BoardPrinter:
         game_board = GameState.get_board()
         
         # print out everything
-        for i in range(0, game_board.get_width()):
-            for j in range(0, game_board.get_height()):
+        for i in range(game_board.get_width()):
+            for j in range(game_board.get_height()):
                 colour =  game_board.get_sprite(i,j).get_default_colour()
                 
                 # print this sprite
