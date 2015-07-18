@@ -9,26 +9,29 @@ class GameBoard:
         ''' Print the board 
             Print out the type of each item
         '''
-        for i in range(0, len(self.board)):
-            for j in range(0, len(self.board[i])):
-                print self.board[i][j].get_type() + ",",
+        for i in range(0, len(self.__board)):
+            for j in range(0, len(self.__board[i])):
+                print self.__board[i][j].get_type() + ",",
             print ""
+            
+    def get_sprite(self, x, y):
+        return self.__board[x][y]
 
     def __init__(self, width = Constants.DEFAULT_BOARD_WIDTH(),
                  height = Constants.DEFAULT_BOARD_HEIGHT()):
-        self.board = []
+        self.__board = []
         
-        # populate the board
+        # populate the __board
         # _ is an "i don't care variable"
         for _ in range(0,width):
             array = []
             for _ in range(0,height):
                 array.append(Sprite())
-            self.board.append(array)
+            self.__board.append(array)
             
         # insert a player sprite
-        self.board[2][3] = PlayerSprite()
+        self.__board[2][3] = PlayerSprite()
         
         # insert a creature sprite
-        self.board[0][1] = CreatureSprite()
+        self.__board[0][1] = CreatureSprite()
         
