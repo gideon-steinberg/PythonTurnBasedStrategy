@@ -25,3 +25,6 @@ class TurnTracker:
     
     def get_monsters(self):
         return self.__monsters
+    
+    def __init__(self):
+        self.refresh_players_and_monsters()
