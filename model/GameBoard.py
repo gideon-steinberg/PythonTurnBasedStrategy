@@ -16,6 +16,12 @@ class GameBoard:
             
     def get_sprite(self, x, y):
         return self.__board[x][y]
+    
+    def get_width(self):
+        return len(self.__board)
+    
+    def get_height(self):
+        return len(self.__board[0]) 
 
     def __init__(self, width = Constants.DEFAULT_BOARD_WIDTH(),
                  height = Constants.DEFAULT_BOARD_HEIGHT()):
