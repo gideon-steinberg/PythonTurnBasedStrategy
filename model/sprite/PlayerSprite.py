@@ -1,4 +1,4 @@
-from model.sprites.CreatureSprite import CreatureSprite
+from model.sprite.CreatureSprite import CreatureSprite
 
 class PlayerSprite(CreatureSprite):
     def get_type(self):

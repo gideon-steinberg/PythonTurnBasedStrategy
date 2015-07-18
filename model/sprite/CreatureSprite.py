@@ -1,4 +1,4 @@
-from model.sprites.Sprite import Sprite
+from model.sprite.Sprite import Sprite
 
 class CreatureSprite(Sprite):
     def is_blank(self):
