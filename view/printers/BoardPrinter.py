@@ -14,8 +14,8 @@ class BoardPrinter:
                 colour =  game_board.get_sprite(i,j).get_default_colour()
                 
                 # print this sprite
-                canvas.create_rectangle(i * Constants.DEFAULT_SPRITE_WIDTH(),
-                                        j * Constants.DEFAULT_SPRITE_HEIGHT(),
-                                        (i + 1) * Constants.DEFAULT_SPRITE_WIDTH(),
-                                        (j + 1) * Constants.DEFAULT_SPRITE_HEIGHT(),
+                canvas.create_rectangle(i      * Constants.DEFAULT_SPRITE_WIDTH(),
+                                        j      * Constants.DEFAULT_SPRITE_HEIGHT(),
+                                       (i + 1) * Constants.DEFAULT_SPRITE_WIDTH(),
+                                       (j + 1) * Constants.DEFAULT_SPRITE_HEIGHT(),
                                         fill=colour)
