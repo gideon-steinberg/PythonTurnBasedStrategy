@@ -1,11 +1,14 @@
 from Tkinter import Frame
 from Tkinter import Tk
 from Tkinter import Canvas
+from Utils.Constants import Constants
 
 class CanvasFrame(Frame):
     
     def initializeCanvas(self):
-        self.canvas = Canvas(self.master, width=800, height=600)
+        self.canvas = Canvas(self.master,
+                            width=Constants.DEFAULT_FRAME_WIDTH(),
+                            height=Constants.DEFAULT_FRAME_HEIGHT())
         self.canvas.pack()
         self.pack()
         
@@ -23,12 +26,8 @@ class CanvasFrame(Frame):
         self.x = self.x + 1
         self.y = self.y + 2
         self.rectangleX = self.rectangleX + 1
-        print 'in loop'
-        print self.x
-        print self.y
         self.master.after(1000, self.timer_tick)
         
-    
     def __init__(self):
         Frame.__init__(self, Tk())
         self.pack()
