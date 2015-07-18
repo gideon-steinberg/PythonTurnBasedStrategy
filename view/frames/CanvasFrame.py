@@ -5,6 +5,9 @@ from helper.Constants import Constants
 from controller.timers.PrintTimer import PrintTimer
 from controller.timers.RefreshTimer import RefreshTimer
 from view.printers.BoardPrinter import BoardPrinter
+from controller.eventhandlers.ArrowHandler import ArrowHandler
+from controller.eventhandlers.KeyMovementHandler import KeyMovementHandler
+from controller.eventhandlers.MouseClickHandler import MouseClickHandler
 
 class CanvasFrame(Frame):
     
@@ -16,8 +19,12 @@ class CanvasFrame(Frame):
         self.pack()
         
     def __setup_timer(self):
-        refresh_timer = RefreshTimer(self.master, 100, self)
-        refresh_timer.setup_timer()
+        RefreshTimer(self.master, 100, self)
+        
+    def __setup_handlers(self):
+        ArrowHandler(self.master)
+        KeyMovementHandler(self.master)
+        MouseClickHandler(self.master)
         
     def refresh(self):
         self.__canvas.delete('all')
@@ -29,6 +36,6 @@ class CanvasFrame(Frame):
         
         self.__initialize_canvas()
         self.__setup_timer()
+        self.__setup_handlers()
         
-        print_timer = PrintTimer(self.master, 50)
-        print_timer.setup_timer() 
+        #print_timer = PrintTimer(self.master, 50)
