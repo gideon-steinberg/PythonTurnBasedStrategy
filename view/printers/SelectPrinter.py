@@ -16,7 +16,6 @@ class SelectPrinter:
             
             movement_range = GameState.get_board().get_sprite(x,y).get_movement_range()
             possible_movements = MovementHelper.get_possible_movement_spaces(movement_range, x, y)
-            print possible_movements
             
             for movement in possible_movements:
                 if GameState.get_board().get_sprite(movement[0], movement[1]).is_blank():
