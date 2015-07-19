@@ -57,7 +57,6 @@ class GameBoard:
     def select_sprite(self, x ,y, monster_action=False):
         # player turn
         if len(self.__turntracker.get_players_to_act()) > 0:
-            print 'players turn'
             # if a player is selected
             if isinstance(self.__board[x][y], PlayerSprite):
                 # if there are no players to act ignore it

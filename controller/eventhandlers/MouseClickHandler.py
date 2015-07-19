@@ -1,6 +1,6 @@
 from controller.eventhandlers.BaseHandler import BaseHandler
 from helper.Constants import Constants
-from model.GameState import GameState
+from model.state.GameState import GameState
 class MouseClickHandler(BaseHandler):
     def handle_event(self, event):
         x_index = event.x / Constants.DEFAULT_SPRITE_WIDTH()

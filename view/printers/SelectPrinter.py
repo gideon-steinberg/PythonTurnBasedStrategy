@@ -1,4 +1,4 @@
-from model.GameState import GameState
+from model.state.GameState import GameState
 from helper.Constants import Constants
 from helper.MovementHelper import MovementHelper
 from helper.OnScreenHelper import OnScreenHelper

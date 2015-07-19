@@ -1,5 +1,5 @@
-from model.GameBoard import GameBoard
-from model.TurnTracker import TurnTracker
+from model.state.GameBoard import GameBoard
+from model.state.TurnTracker import TurnTracker
 
 class GameState:
     __board = None

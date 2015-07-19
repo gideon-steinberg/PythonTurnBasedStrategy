@@ -1,5 +1,5 @@
 from controller.timers.BaseTimer import BaseTimer
-from model.GameState import GameState
+from model.state.GameState import GameState
 from helper.MovementHelper import MovementHelper
 from random import randint
 from helper.OnScreenHelper import OnScreenHelper
