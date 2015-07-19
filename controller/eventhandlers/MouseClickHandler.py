@@ -1,11 +1,11 @@
 from controller.eventhandlers.BaseHandler import BaseHandler
 from helper.Constants import Constants
-from model.state.GameState import GameState
+from model.helper.SpriteSelector import SpriteSelector
 class MouseClickHandler(BaseHandler):
     def handle_event(self, event):
-        x_index = event.x / Constants.DEFAULT_SPRITE_WIDTH()
-        y_index = event.y / Constants.DEFAULT_SPRITE_HEIGHT()
-        GameState.get_board().select_sprite(x_index, y_index)
+        x = event.x / Constants.DEFAULT_SPRITE_WIDTH()
+        y = event.y / Constants.DEFAULT_SPRITE_HEIGHT()
+        SpriteSelector.select_player_sprite(x, y)
             
     def events_to_bind(self):
         return ['<Button-1>']

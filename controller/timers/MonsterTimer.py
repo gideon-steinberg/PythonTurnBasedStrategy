@@ -3,6 +3,7 @@ from model.state.GameState import GameState
 from helper.MovementHelper import MovementHelper
 from random import randint
 from helper.OnScreenHelper import OnScreenHelper
+from model.helper.SpriteSelector import SpriteSelector
        
 class MonsterTimer(BaseTimer):
     def do_action(self):
@@ -25,14 +26,14 @@ class MonsterTimer(BaseTimer):
                     new_x = self.__selection[0]
                     new_y = self.__selection[1]
                 self.__monster_info = monster_info
-                GameState.get_board().select_sprite(x, y, True)
+                SpriteSelector.select_monster_sprite(x, y)
             else:
                 x = self.__selection[0]
                 y = self.__selection[1]
                 
                 GameState.get_board().reset_selected_item()
-                GameState.get_board().select_sprite(self.__monster_info[0], self.__monster_info[1], True)
-                GameState.get_board().select_sprite(x, y, True)
+                SpriteSelector.select_monster_sprite(self.__monster_info[0], self.__monster_info[1])
+                SpriteSelector.select_monster_sprite(x, y)
                 
                 self.__selection = None
                 self.__monster_info = None
