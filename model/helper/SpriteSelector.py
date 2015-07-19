@@ -70,18 +70,11 @@ class SpriteSelector:
         
     @staticmethod
     def __player_is_selected(sprite):
-        result = True
         board = GameState.get_board()
         x = board.get_selected_x()
         y = board.get_selected_y()
         
-        if not isinstance(board.get_sprite(x, y), PlayerSprite):
-            result = False
-            
-        if x < 0 or y < 0:
-            result = False
-            
-        return result
+        return isinstance(board.get_sprite(x, y), PlayerSprite) or x < 0 or y < 0
     
     @staticmethod
     def __reset_selection():
