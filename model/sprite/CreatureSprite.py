@@ -20,6 +20,9 @@ class CreatureSprite(Sprite):
     def get_movement_range(self):
         return 5
     
+    def get_attack_range(self):
+        return 1
+    
     def move(self, current_x, current_y, x, y, board, sprite_swapper):
         possible_movements = MovementHelper.get_possible_movement_spaces(self.get_movement_range(), current_x, current_y)
         # if we can move there and there is a blank sprite

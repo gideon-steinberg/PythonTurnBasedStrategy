@@ -56,7 +56,7 @@ class TurnTracker:
         # find monsters that are 1 square away
         for monster in self.__monster_info.keys():
             monster_info = self.__monster_info[monster]
-            if math.fabs(monster_info[0] - x) <= 1 and math.fabs(monster_info[1] - y) <= 1:
+            if math.fabs(monster_info[0] - x) + math.fabs(monster_info[1] - y) <= player.get_attack_range():
                 self.__players_to_attack.append(player)
                 break
         
@@ -67,7 +67,7 @@ class TurnTracker:
         # find players that are 1 square away
         for player in self.__player_info.keys():
             player_info = self.__player_info[player]
-            if math.fabs(x - player_info[0]) <= 1 and math.fabs(y - player_info[1]) <= 1:
+            if math.fabs(x - player_info[0]) + math.fabs(y - player_info[1]) <= monster.get_attack_range():
                 self.__monsters_to_attack.append(monster)
                 break
         
