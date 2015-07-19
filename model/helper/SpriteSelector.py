@@ -15,7 +15,7 @@ class SpriteSelector:
         
         if isinstance(sprite, PlayerSprite):
             SpriteSelector.__update_player_selection(x, y)
-        elif SpriteSelector.__is_captured_player_selection(sprite):
+        elif SpriteSelector.__player_is_selected(sprite):
             SpriteSelector.__move_sprite(x, y)
         else:
             SpriteSelector.__reset_selection()
@@ -27,6 +27,7 @@ class SpriteSelector:
         selected_x = board.get_selected_x()
         selected_y = board.get_selected_y()
         
+        # if it is not the momsters turn don't do anything
         if len(turntracker.get_players_to_act()) > 0:
             return
         
@@ -68,7 +69,7 @@ class SpriteSelector:
         SpriteSelector.__reset_selection()
         
     @staticmethod
-    def __is_captured_player_selection(sprite):
+    def __player_is_selected(sprite):
         result = True
         board = GameState.get_board()
         x = board.get_selected_x()
