@@ -9,18 +9,19 @@ from controller.eventhandlers.MouseClickHandler import MouseClickHandler
 from view.printers.SelectPrinter import SelectPrinter
 from view.printers.BoardPrinter import BoardPrinter
 from controller.timers.MonsterTimer import MonsterTimer
+from view.printers.TurnMenuPrinter import TurnMenuPrinter
 
 class CanvasFrame(Frame):
     
     def __initialize_canvas(self):
         self.__canvas = Canvas(self.master,
-                            width=Constants.DEFAULT_FRAME_WIDTH(),
+                            width=Constants.DEFAULT_FRAME_WIDTH() + 120,
                             height=Constants.DEFAULT_FRAME_HEIGHT())
         self.__canvas.pack()
         self.pack()
         
     def __setup_timer(self):
-        RefreshTimer(self.master, 100, self)
+        RefreshTimer(self.master, 10, self)
         MonsterTimer(self.master, 1000)
         
     def __setup_handlers(self):
@@ -32,6 +33,7 @@ class CanvasFrame(Frame):
         self.__canvas.delete('all')
         BoardPrinter.print_board(self.__canvas)
         SelectPrinter.print_selected(self.__canvas)
+        TurnMenuPrinter.print_turn_menu(self.__canvas)
         
     def __init__(self):
         Frame.__init__(self, Tk())
