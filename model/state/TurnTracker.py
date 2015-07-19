@@ -11,6 +11,8 @@ class TurnTracker:
         self.__monsters = []
         self.__players_to_move = []
         self.__monsters_to_move = []
+        self.__players_to_attack = []
+        self.__monsters_to_attack = []
         self.__monster_info = {}
         width = self.__board.get_width()
         height = self.__board.get_height()
@@ -40,3 +42,6 @@ class TurnTracker:
         
     def track_monster_move(self, monster):
         self.__monsters_to_move.remove(monster)
+        
+    def is_player_turn(self):
+        return len(self.__players_to_move) > 0 or len(self.__players_to_attack) > 0

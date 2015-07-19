@@ -10,7 +10,7 @@ class SpriteSelector:
         sprite = GameState.get_board().get_sprite(x, y)
         
         # if it is not the players turn don't do anything
-        if len(turntracker.get_players_to_move()) == 0:
+        if not turntracker.is_player_turn():
             return
         
         if isinstance(sprite, PlayerSprite):
@@ -28,7 +28,7 @@ class SpriteSelector:
         selected_y = board.get_selected_y()
         
         # if it is not the momsters turn don't do anything
-        if len(turntracker.get_players_to_move()) > 0:
+        if turntracker.is_player_turn():
             return
         
         if selected_x >= 0 and selected_y >= 0:
