@@ -1,5 +1,6 @@
 from model.sprite.PlayerSprite import PlayerSprite
 from model.sprite.MonsterSprite import MonsterSprite
+import math
 class TurnTracker:
     
     def set_board(self, board):
@@ -36,17 +37,41 @@ class TurnTracker:
     def get_monsters_to_move(self):
         return self.__monsters_to_move
     
+    def get_players_to_attack(self):
+        return self.__players_to_attack
+    
+    def get_monsters_to_attack(self):
+        return self.__monsters_to_attack
+    
     def get_monster_info(self, monster):
         return self.__monster_info[monster]
     
     def get_player_info(self, player):
         return self.__player_info[player]
     
-    def track_player_move(self, player):
+    def track_player_move(self, player, x, y):
         self.__players_to_move.remove(player)
+        self.__player_info[player] =  [x, y]
         
-    def track_monster_move(self, monster):
+        # find monsters that are 1 square away
+        for monster in self.__monster_info.keys():
+            monster_info = self.__monster_info[monster]
+            if math.fabs(monster_info[0] - x) <= 1 and math.fabs(monster_info[1] - y) <= 1:
+                self.__players_to_attack.append(player)
+                break
+        
+    def track_monster_move(self, monster, x, y):
         self.__monsters_to_move.remove(monster)
+        self.__monster_info[monster] = [x, y]
+        
+        # find players that are 1 square away
+        for player in self.__player_info.keys():
+            player_info = self.__player_info[player]
+            if math.fabs(x - player_info[0]) <= 1 and math.fabs(y - player_info[1]) <= 1:
+                self.__monsters_to_attack.append(monster)
+                break
         
     def is_player_turn(self):
-        return len(self.__players_to_move) > 0 or len(self.__players_to_attack) > 0
+        return ((len(self.__players_to_move) > 0 or
+                len(self.__players_to_attack) > 0) and
+                len(self.__monsters_to_attack) == 0)
