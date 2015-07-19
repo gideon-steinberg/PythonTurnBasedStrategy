@@ -2,7 +2,6 @@ from Tkinter import Frame
 from Tkinter import Tk
 from Tkinter import Canvas
 from helper.Constants import Constants
-from controller.timers.PrintTimer import PrintTimer
 from controller.timers.RefreshTimer import RefreshTimer
 from controller.eventhandlers.ArrowHandler import ArrowHandler
 from controller.eventhandlers.KeyMovementHandler import KeyMovementHandler
@@ -41,5 +40,3 @@ class CanvasFrame(Frame):
         self.__initialize_canvas()
         self.__setup_timer()
         self.__setup_handlers()
-        
-        #print_timer = PrintTimer(self.master, 50)

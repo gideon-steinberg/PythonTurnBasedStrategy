@@ -6,16 +6,7 @@ from model.sprite.CreatureSprite import CreatureSprite
 from model.helper.SpriteSwapper import SpriteSwapper
 
 class GameBoard:
-    
-    def print_board(self):
-        ''' Print the board 
-            Print out the type of each item
-        '''
-        for i in range(len(self.__board)):
-            for j in range(len(self.__board[i])):
-                print self.__board[i][j].get_type() + ",",
-            print ""
-            
+             
     def get_sprite(self, x, y):
         return self.__board[x][y]
     
