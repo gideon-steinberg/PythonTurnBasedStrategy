@@ -3,6 +3,7 @@ from helper.Constants import Constants
 from model.sprite.PlayerSprite import PlayerSprite
 from model.sprite.MonsterSprite import MonsterSprite
 from model.sprite.CreatureSprite import CreatureSprite
+from model.helper.SpriteSwapper import SpriteSwapper
 
 class GameBoard:
     
@@ -33,27 +34,9 @@ class GameBoard:
     def set_turntracker(self, turntracker):
         self.__turntracker = turntracker
     
-    def swap_sprites(self, x1, y1, x2, y2):
-        temp = self.__board[x1][y1]
-        self.__board[x1][y1] = self.__board[x2][y2]
-        self.__board[x2][y2] = temp
+    def set_sprite(self, x, y, sprite):
+        self.__board[x][y] = sprite
         
-        # get the turntracker to track this action
-        if isinstance(self.__board[x1][y1], PlayerSprite):
-            self.__turntracker.track_player_turn(self.__board[x1][y1])
-            
-        # get the turntracker to track this action
-        if isinstance(self.__board[x2][y2], PlayerSprite):
-            self.__turntracker.track_player_turn(self.__board[x2][y2])
-            
-                    # get the turntracker to track this action
-        if isinstance(self.__board[x1][y1], MonsterSprite):
-            self.__turntracker.track_monster_turn(self.__board[x1][y1])
-            
-        # get the turntracker to track this action
-        if isinstance(self.__board[x2][y2], MonsterSprite):
-            self.__turntracker.track_monster_turn()(self.__board[x2][y2])
-    
     def select_sprite(self, x ,y, monster_action=False):
         # player turn
         if len(self.__turntracker.get_players_to_act()) > 0:
@@ -73,7 +56,8 @@ class GameBoard:
                 # move the player
                 player = self.__board[self.__selected_x][self.__selected_y]
                 if isinstance(player, PlayerSprite):
-                    player.move(self.__selected_x, self.__selected_y, x, y, self)
+                    player.move(self.__selected_x, self.__selected_y,
+                                x, y, self, SpriteSwapper(self.__turntracker))
                 self.reset_selected_item()
             else:
                 self.reset_selected_item()
@@ -83,7 +67,8 @@ class GameBoard:
                 #move the creature
                 creature = self.__board[self.__selected_x][self.__selected_y]
                 if isinstance(creature, CreatureSprite):
-                    creature.move(self.__selected_x, self.__selected_y, x, y, self)
+                    creature.move(self.__selected_x, self.__selected_y,
+                                  x, y, self, SpriteSwapper(self.__turntracker))
                 self.reset_selected_item()
             else:
                 # capture this selection

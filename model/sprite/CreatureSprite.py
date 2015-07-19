@@ -20,8 +20,8 @@ class CreatureSprite(Sprite):
     def get_movement_range(self):
         return 5
     
-    def move(self, current_x, current_y, x, y, board):
+    def move(self, current_x, current_y, x, y, board, sprite_swapper):
         possible_movements = MovementHelper.get_possible_movement_spaces(self.get_movement_range(), current_x, current_y)
         # if we can move there and there is a blank sprite
         if [x,y] in possible_movements and board.get_sprite(x, y).is_blank():
-            board.swap_sprites(x, y, current_x, current_y)
+            sprite_swapper.swap_sprites(x, y, current_x, current_y, board)
