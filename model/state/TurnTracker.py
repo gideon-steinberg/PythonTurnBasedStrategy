@@ -14,6 +14,7 @@ class TurnTracker:
         self.__players_to_attack = []
         self.__monsters_to_attack = []
         self.__monster_info = {}
+        self.__player_info = {}
         width = self.__board.get_width()
         height = self.__board.get_height()
         
@@ -23,6 +24,7 @@ class TurnTracker:
                 if isinstance(sprite, PlayerSprite):
                     self.__players.append(sprite)
                     self.__players_to_move.append(sprite)
+                    self.__player_info[sprite] = [i, j]
                 elif isinstance(sprite, MonsterSprite):
                     self.__monsters.append(sprite)
                     self.__monsters_to_move.append(sprite)
@@ -36,6 +38,9 @@ class TurnTracker:
     
     def get_monster_info(self, monster):
         return self.__monster_info[monster]
+    
+    def get_player_info(self, player):
+        return self.__player_info[player]
     
     def track_player_move(self, player):
         self.__players_to_move.remove(player)
