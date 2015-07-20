@@ -59,4 +59,6 @@ class CreatureSprite(Sprite):
             creature_info = turntracker.get_info(other_creature)
             board.set_sprite(creature_info[0], creature_info[1], Sprite())
             turntracker.remove_creature(other_creature)
-        
+    
+    def can_attack(self, other_creature):
+        return False

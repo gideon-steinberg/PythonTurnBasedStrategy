@@ -26,4 +26,4 @@ class Constants:
     
     @staticmethod
     def DEFAULT_TURN_MENU_DISTANCE():
-        return 80
+        return 100

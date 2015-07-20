@@ -14,7 +14,7 @@ class SelectPrinter:
             # print this selection
             SelectPrinter.__print_small_box(canvas, x, y, 'green')
             
-            # print possible options to move!
+            
             sprite = GameState.get_board().get_sprite(x,y)
             movement_range = sprite.get_movement_range()
             blank_check = True
@@ -25,10 +25,12 @@ class SelectPrinter:
                     
             possible_movements = MovementHelper.get_possible_movement_spaces(movement_range, x, y)
             
+            # print possible options to move!
             for movement in possible_movements:
                 if (movement[0] >= 0 and movement[1] >= 0 and 
                     movement[0] < Constants.DEFAULT_BOARD_WIDTH() and movement[1] < Constants.DEFAULT_BOARD_HEIGHT()):
-                    if GameState.get_board().get_sprite(movement[0], movement[1]).is_blank() == blank_check:
+                    target = GameState.get_board().get_sprite(movement[0], movement[1])
+                    if target.is_blank() == blank_check and sprite.can_attack(target):
                         SelectPrinter.__print_small_box(canvas, movement[0], movement[1], 'red')
             
     @staticmethod

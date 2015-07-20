@@ -9,3 +9,6 @@ class PlayerSprite(CreatureSprite):
     
     def track_attack(self, turntracker):
         turntracker.track_player_attack(self)
+        
+    def can_attack(self, other_creature):
+        return not isinstance(other_creature, PlayerSprite)

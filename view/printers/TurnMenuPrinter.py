@@ -46,9 +46,12 @@ class TurnMenuPrinter:
             player_info = turntracker.get_player_info(player)
             
             canvas.create_text(x_starting + 25, position_down * turn_menu_distance + 65,
-                               text="(" + str(player_info[0]) + "," + str(player_info[1]) + ")")
+                               text=player.get_type())
             
             canvas.create_text(x_starting + 25, position_down * turn_menu_distance + 85,
+                               text="(" + str(player_info[0]) + "," + str(player_info[1]) + ")")
+            
+            canvas.create_text(x_starting + 25, position_down * turn_menu_distance + 105,
                                text=player.get_hp_string())
             position_down = position_down + 1
             
@@ -61,10 +64,13 @@ class TurnMenuPrinter:
             
             monster_info = turntracker.get_monster_info(monster)
             
-            canvas.create_text(x_starting + 25, position_down * turn_menu_distance + 65,
-                               text="(" + str(monster_info[0]) + "," + str(monster_info[1]) + ")")
+            canvas.create_text(x_starting + 35, position_down * turn_menu_distance + 65,
+                               text=monster.get_type())
             
             canvas.create_text(x_starting + 25, position_down * turn_menu_distance + 85,
+                               text="(" + str(monster_info[0]) + "," + str(monster_info[1]) + ")")
+            
+            canvas.create_text(x_starting + 25, position_down * turn_menu_distance + 105,
                                text=monster.get_hp_string())
             position_down = position_down + 1
             
