@@ -23,3 +23,7 @@ class Constants:
     @staticmethod
     def DEFAULT_SPRITE_HEIGHT():
         return 40
+    
+    @staticmethod
+    def DEFAULT_TURN_MENU_DISTANCE():
+        return 80

@@ -35,32 +35,37 @@ class TurnMenuPrinter:
             if monster not in monsters:
                 monsters.append(monster)
         
+        turn_menu_distance = Constants.DEFAULT_TURN_MENU_DISTANCE()
         position_down = 0
         x_starting = Constants.DEFAULT_FRAME_WIDTH()
         for player in players:
             TurnMenuPrinter.__print_small_box(canvas, x_starting, 
-                                              position_down * 60 + 20,
+                                              position_down * turn_menu_distance + 20,
                                               player.get_default_colour())
             
             player_info = turntracker.get_player_info(player)
             
-            canvas.create_text(x_starting + 25, position_down * 60 + 65,
+            canvas.create_text(x_starting + 25, position_down * turn_menu_distance + 65,
                                text="(" + str(player_info[0]) + "," + str(player_info[1]) + ")")
             
+            canvas.create_text(x_starting + 25, position_down * turn_menu_distance + 85,
+                               text=player.get_hp_string())
             position_down = position_down + 1
             
         position_down = 0
         x_starting = Constants.DEFAULT_FRAME_WIDTH() + 50
         for monster in monsters:
             TurnMenuPrinter.__print_small_box(canvas, x_starting, 
-                                              position_down * 60 + 20,
+                                              position_down * turn_menu_distance + 20,
                                               monster.get_default_colour())
             
             monster_info = turntracker.get_monster_info(monster)
             
-            canvas.create_text(x_starting + 25, position_down * 60 + 65,
+            canvas.create_text(x_starting + 25, position_down * turn_menu_distance + 65,
                                text="(" + str(monster_info[0]) + "," + str(monster_info[1]) + ")")
             
+            canvas.create_text(x_starting + 25, position_down * turn_menu_distance + 85,
+                               text=monster.get_hp_string())
             position_down = position_down + 1
             
     @staticmethod
