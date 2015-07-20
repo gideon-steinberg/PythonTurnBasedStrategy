@@ -45,8 +45,15 @@ class SpriteSelector:
         selected_x = board.get_selected_x()
         selected_y = board.get_selected_y()
         player = board.get_sprite(x, y)
+        target = board.get_sprite(selected_x, selected_y)
         
-        if (player in turntracker.get_players_to_move() or
+        if target == player:
+            SpriteSelector.__reset_selection()
+            if player in turntracker.get_players_to_move():
+                turntracker.track_player_move(player, x, y)
+            elif player in turntracker.get_players_to_attack():
+                turntracker.track_player_attack(player)
+        elif (player in turntracker.get_players_to_move() or
            player in turntracker.get_players_to_attack()):
             # already selected
             if selected_x == x and selected_y == y:
@@ -63,7 +70,7 @@ class SpriteSelector:
         selected_x = board.get_selected_x()
         selected_y = board.get_selected_y()
         player = board.get_sprite(selected_x, selected_y)
-        
+
         if player in turntracker.get_players_to_move():
             SpriteSelector.__move_sprite(x, y)
         elif player in turntracker.get_players_to_attack():
