@@ -16,7 +16,7 @@ class SpriteSelector:
         if isinstance(sprite, PlayerSprite):
             SpriteSelector.__update_player_selection(x, y)
         elif SpriteSelector.__player_is_selected(sprite):
-            SpriteSelector.__move_sprite(x, y)
+            SpriteSelector.__handle_player_is_selected(x, y)
         else:
             SpriteSelector.__reset_selection()
         
@@ -46,7 +46,8 @@ class SpriteSelector:
         selected_y = board.get_selected_y()
         player = board.get_sprite(x, y)
         
-        if player in turntracker.get_players_to_move():
+        if (player in turntracker.get_players_to_move() or
+           player in turntracker.get_players_to_attack()):
             # already selected
             if selected_x == x and selected_y == y:
                 SpriteSelector.__reset_selection()
@@ -54,7 +55,20 @@ class SpriteSelector:
                 # capture this selection
                 board.set_selected_x(x)
                 board.set_selected_y(y)
+    
+    @staticmethod
+    def __handle_player_is_selected(x, y):
+        board = GameState.get_board()
+        turntracker = GameState.get_turntracker()
+        selected_x = board.get_selected_x()
+        selected_y = board.get_selected_y()
+        player = board.get_sprite(selected_x, selected_y)
         
+        if player in turntracker.get_players_to_move():
+            SpriteSelector.__move_sprite(x, y)
+        elif player in turntracker.get_players_to_attack():
+            SpriteSelector.__attack_sprite(x, y)
+            
     @staticmethod
     def __move_sprite(x, y):
         board = GameState.get_board()
@@ -66,6 +80,20 @@ class SpriteSelector:
         if isinstance(player, CreatureSprite):
             player.move(selected_x, selected_y,
                         x, y, board, SpriteSwapper(turntracker))
+        SpriteSelector.__reset_selection()
+        
+    @staticmethod
+    def __attack_sprite(x, y):
+        board = GameState.get_board()
+        turntracker = GameState.get_turntracker()
+        selected_x = board.get_selected_x()
+        selected_y = board.get_selected_y()
+        first_sprite = board.get_sprite(selected_x, selected_y)
+        second_sprite = board.get_sprite(x, y)
+        
+        if isinstance(first_sprite, CreatureSprite) and isinstance(second_sprite, CreatureSprite):
+            first_sprite.attack(second_sprite, turntracker)
+            
         SpriteSelector.__reset_selection()
         
     @staticmethod

@@ -70,7 +70,13 @@ class TurnTracker:
             if math.fabs(x - player_info[0]) + math.fabs(y - player_info[1]) <= monster.get_attack_range():
                 self.__monsters_to_attack.append(monster)
                 break
+    
+    def track_player_attack(self, player):
+        self.__players_to_attack.remove(player)
         
+    def track_monster_attack(self, monster):
+        self.__monsters_to_attack.remove(monster)
+            
     def is_player_turn(self):
         return ((len(self.__players_to_move) > 0 or
                 len(self.__players_to_attack) > 0) and
