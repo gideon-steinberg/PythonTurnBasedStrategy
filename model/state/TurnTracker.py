@@ -49,6 +49,26 @@ class TurnTracker:
     def get_player_info(self, player):
         return self.__player_info[player]
     
+    def get_info(self, creature):
+        if isinstance(creature, PlayerSprite):
+            return self.get_player_info(creature)
+        elif isinstance(creature, MonsterSprite):
+            return self.get_monster_info(creature)
+    
+    def remove_creature(self, creature):
+        if isinstance(creature, PlayerSprite):
+            self.__player_info.pop(creature)
+            if creature in self.__players_to_move:
+                self.__players_to_move.remove(creature)
+            if creature in self.__players_to_attack:
+                self.__players_to_attack.remove(creature)
+        elif isinstance(creature, MonsterSprite):
+            self.__monster_info.pop(creature)
+            if creature in self.__monsters_to_move:
+                self.__monsters_to_move.remove(creature)
+            if creature in self.__monsters_to_attack:
+                self.__monsters_to_attack.remove(creature)
+        
     def track_player_move(self, player, x, y):
         self.__players_to_move.remove(player)
         self.__player_info[player] =  [x, y]

@@ -30,6 +30,9 @@ class CreatureSprite(Sprite):
     def get_attack(self):
         return 2
     
+    def is_dead(self):
+        return self.__current_hp <= 0
+    
     def get_hp_string(self):
         return str(self.__current_hp) + "/" + str(self.__hp)
     
@@ -46,8 +49,14 @@ class CreatureSprite(Sprite):
         ''' defined in MonsterSprite and PlayerSprite '''
         pass
             
-    def attack(self, other_creature, turntracker):
+    def attack(self, other_creature, board, turntracker):
         damage = self.get_attack()
         other_creature.decrease_hp(damage)
         self.track_attack(turntracker)
+        
+        # remove dead creatures
+        if other_creature.is_dead():
+            creature_info = turntracker.get_info(other_creature)
+            board.set_sprite(creature_info[0], creature_info[1], Sprite())
+            turntracker.remove_creature(other_creature)
         

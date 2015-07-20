@@ -8,7 +8,9 @@ from model.helper.SpriteSelector import SpriteSelector
 class MonsterTimer(BaseTimer):
     def do_action(self):
         if not GameState.get_turntracker().is_player_turn():
-            if self.__selection == None:
+            if len(GameState.get_turntracker().get_monsters_to_move()) == 0:
+                GameState.get_turntracker().refresh_players_and_monsters()
+            elif self.__selection == None:
                 monster = GameState.get_turntracker().get_monsters_to_move()[0]
                 movement_range = monster.get_movement_range()
                 monster_info = GameState.get_turntracker().get_monster_info(monster)

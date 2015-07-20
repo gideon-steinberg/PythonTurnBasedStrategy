@@ -92,7 +92,7 @@ class SpriteSelector:
         second_sprite = board.get_sprite(x, y)
         
         if isinstance(first_sprite, CreatureSprite) and isinstance(second_sprite, CreatureSprite):
-            first_sprite.attack(second_sprite, turntracker)
+            first_sprite.attack(second_sprite, board, turntracker)
             
         SpriteSelector.__reset_selection()
         
